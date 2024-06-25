@@ -3,6 +3,20 @@ import esMayorEdad from "./validarEdad.js";
 import { tiposError, mensajes } from "./CustomErrors.js";
 
 const camposFormulario = document.querySelectorAll("[required]");
+const formulario = document.querySelector("[data-formulario]");
+
+formulario.addEventListener("submit", (evento) => {
+  evento.preventDefault();
+  const listaRespuestas = {
+    nombre: evento.target.elements["nombre"].value,
+    email: evento.target.elements["email"].value,
+    identificacion: evento.target.elements["identificacion"].value,
+    cuil: evento.target.elements["cuil"].value,
+    fecha_nacimiento: evento.target.elements["fecha_nacimiento"].value,
+  };
+  localStorage.setItem("registro", JSON.stringify(listaRespuestas));
+  window.location.href = "./abrir-cuenta-form-2.html";
+});
 
 camposFormulario.forEach((campo) => {
   campo.addEventListener("blur", () => verificarCampo(campo));
